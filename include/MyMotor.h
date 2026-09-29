@@ -4,15 +4,17 @@
 #include <Arduino.h>
 #include <ESP32Encoder.h> // ESP32Encoder library for handling encoders
 
-#define MOT1_A 26 
-#define MOT1_B 27 
-#define ENC1_A 14 
-#define ENC1_B 13 
+// to be modified
 
-#define MOT2_A 18 
-#define MOT2_B 17 
-#define ENC2_A 16 
-#define ENC2_B  4 
+#define MOT1_A 1 
+#define MOT1_B 2 
+#define ENC1_A 4 
+#define ENC1_B 3 
+
+#define MOT2_A 8 
+#define MOT2_B 7 
+#define ENC2_A 6 
+#define ENC2_B 12 
 
 inline volatile long EncoderTick1, EncoderTick2;    
 
