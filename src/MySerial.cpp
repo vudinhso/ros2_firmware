@@ -119,4 +119,52 @@ void parseCommand(const String &msg)
   }
 }
 
+void SerialReceiveProcess()
+{
+    static String incomingMessage = "";
+    static bool receivingRos = false;
+
+    while (Serial.available() > 0)
+    {
+        char c = (char)Serial.read();
+
+        // --- ROS2 Protocol (< ... >) ---
+        if (c == '<')
+        {
+            receivingRos = true;
+            incomingMessage = ""; // Reset buffer for ROS message
+        }
+        else if (c == '>' && receivingRos)
+        {
+            receivingRos = false;
+            parseCommand(incomingMessage); // Process ROS2 format
+            incomingMessage = "";          // Clear buffer
+        }
+        // --- Keyboard Testing Protocol (q... \n or w... \n) ---
+        else if (c == '\n' && !receivingRos)
+        {
+            if (incomingMessage.length() > 0)
+            {
+                char cmd = incomingMessage[0];
+                String valueStr = incomingMessage.substring(1);
+                
+                if (cmd == 'q')
+                {
+                    w1_ref = valueStr.toFloat();
+                }
+                else if (cmd == 'w')
+                {
+                    w2_ref = valueStr.toFloat();
+                }
+            }
+            incomingMessage = ""; // Clear buffer
+        }
+        // --- Buffer incoming characters ---
+        else if (c != '\r') // Ignore carriage returns if your serial monitor sends \r\n
+        {
+            incomingMessage += c;
+        }
+    }
+}
+
 

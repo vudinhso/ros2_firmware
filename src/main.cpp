@@ -32,5 +32,6 @@ void loop()
   IMUGetData();                // Get the data from the IMU
   SerialDataPrint();           // Print the data to the Serial Monitor
   // SerialDataRead();            // Read the data to the Serial Monitor // Required for ROS2
-  SerialDataWrite();            // Write the data to the Serial Monitor // Only for testing
+  // SerialDataWrite();            // Write the data to the Serial Monitor // Only for testing
+  SerialReceiveProcess();
 }

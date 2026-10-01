@@ -9,6 +9,7 @@ void SerialBegin();     // Function to initialize the serial communication
 void SerialDataPrint(); // Function to print the data to the Serial Monitor
 void SerialDataRead(); // Function to print the data to the Serial Monitor
 void SerialDataWrite(); // Function to print the data to the Serial Monitor
+void SerialReceiveProcess();
 void parseCommand(const String &msg); // Function to parse the command received from the Serial Monitor
 
 #endif
